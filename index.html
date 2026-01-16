@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>KML 3D Viewer</title>
+
+  <link rel="manifest" href="./manifest.json?v=1" />
+  <link rel="stylesheet" href="./styles.css?v=1" />
+
+  <!-- CesiumJS (3D globe) from CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cesium@1.117.0/Build/Cesium/Widgets/widgets.css" />
+  <script src="https://cdn.jsdelivr.net/npm/cesium@1.117.0/Build/Cesium/Cesium.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="title">
+      <h1>KML 3D Viewer</h1>
+      <div class="muted">Load KML, explore in 3D, toggle folders like Google Earth.</div>
+    </div>
+
+    <div class="top-controls">
+      <label class="file">
+        <span class="label">KML file (.kml)</span>
+        <div class="file-row">
+          <input id="kmlInput" type="file" accept=".kml,.xml,application/vnd.google-earth.kml+xml,text/xml,application/xml" />
+        </div>
+        <div id="kmlInfo" class="muted small">No file loaded.</div>
+      </label>
+
+      <div class="row">
+        <button id="zoomTo" class="btn" disabled>Zoom to data</button>
+        <button id="expandAll" class="btn" disabled>Expand all</button>
+        <button id="collapseAll" class="btn" disabled>Collapse all</button>
+        <button id="checkAll" class="btn" disabled>Check all</button>
+        <button id="uncheckAll" class="btn" disabled>Uncheck all</button>
+      </div>
+
+      <div class="row">
+        <input id="search" type="text" placeholder="Search (Participant, Location Source, Building…)" disabled />
+        <label class="check">
+          <input id="hideLabels" type="checkbox" />
+          <span>Hide labels</span>
+        </label>
+      </div>
+
+      <div id="status" class="status" aria-live="polite"></div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-head">
+        <div>
+          <div class="label">Places</div>
+          <div id="treeSummary" class="muted small">Load a KML to see folders.</div>
+        </div>
+      </div>
+      <div id="tree" class="tree">
+        <div class="placeholder">Waiting for KML…</div>
+      </div>
+    </aside>
+
+    <section class="viewer-wrap">
+      <div id="cesiumContainer" class="viewer"></div>
+    </section>
+  </main>
+
+  <footer class="app-footer muted">
+    <strong id="buildStamp">dev-6</strong>
+  </footer>
+
+  <script type="module" src="./app.js?v=6"></script>
+</body>
+</html>
